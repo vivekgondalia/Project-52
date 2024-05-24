@@ -58,6 +58,14 @@ const Movie = () => {
             />
             <button onClick={handleSubmit}>Add Movie</button> 
         </form>
+        <h2>Movie List</h2>
+        <ol>
+            {
+                movieList.map( movie => (
+                    <li key={movie.id}>{movie.title}</li>
+                ))
+            }
+        </ol>
     </>
 }
 
