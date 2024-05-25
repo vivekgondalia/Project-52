@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client'
 import './App.css'
 
 import Movie from './Movie'
-import MovieSearch from './MovieSearch'
+import MovieList from './MovieList'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <MovieSearch />
-    <Movie />
+    <h1>Project 52</h1>
+    {/* <Movie /> */}
+    <MovieList />
   </React.StrictMode>,
 )

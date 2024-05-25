@@ -2,7 +2,6 @@ import {useState} from 'react';
 
 const Movie = () => {
     const [formData, setFormData] = useState({id: '', title: '', releaseYear: '', genre: '', monthOfTheYear: ''});
-    const [movieList, setMovieList] = useState([]);
     const [maxId, setMaxId] = useState(0);
 
     const handleFormChange = (e) => {
@@ -13,20 +12,14 @@ const Movie = () => {
         }));
     }
 
-    const handleCreate = (movie) => {
-        const newMovie = {...movie, id : movieList.length + 1};
-        setMovieList([...movieList, newMovie]);
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleCreate(formData);
-        console.log(formData);
+        // handleCreate(formData);
+        // console.log(formData);
         setFormData({id:'', title : '', releaseYear: '', genre: '', monthOfTheYear:''});
     }
 
     return <>
-        <h1>Project 52</h1>
         <form>
             <input 
                 type="text"
@@ -58,14 +51,6 @@ const Movie = () => {
             />
             <button onClick={handleSubmit}>Add Movie</button> 
         </form>
-        <h2>Movie List</h2>
-        <ol>
-            {
-                movieList.map( movie => (
-                    <li key={movie.id}>{movie.title}</li>
-                ))
-            }
-        </ol>
     </>
 }
 

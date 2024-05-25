@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import movieApi from './movieApi';
 
-const MovieSearch = () => {
+const MovieSearch = ({onAdd}) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     //what am I going to do with this result? 
@@ -31,7 +31,12 @@ const MovieSearch = () => {
         setQuery(value);
     }
 
-    return <> 
+    const handleAddToTheList = (movie) => {
+        onAdd(movie);
+    }
+
+    return <>
+    <h2>Search</h2> 
     <form>
         <input 
                 type="text"
@@ -42,13 +47,16 @@ const MovieSearch = () => {
         />
         <button onClick={handleSearch}>Search</button> 
     </form>
-    <h2>Search Results : </h2>
+    
+    {results.length ? <h2>Search Results : </h2> : null}
+    
     <ol>
         {
             results.map( movie => (
                 <li key={movie.id}>
                     {movie.title} - {movie.release_date.split('-')[0]}
                     {/* <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={`${movie.title}`} /> */}
+                    <button onClick={() => handleAddToTheList(movie)}>Add This Movie!</button>
                 </li>
             ))
         }
