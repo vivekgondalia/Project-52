@@ -14,21 +14,28 @@ const MovieList = () => {
     }
 
     return (
-        <>
-        <h2>Movie List</h2>
-        <ol>
-            {
-                movieList.map( movie => (
-                    <li key={movie.id}>
-                        {movie.title}
-                        <button onClick={() => handleRemove(movie.id)}>Remove This</button>
-                    </li>
-                ))
-            }
-        </ol>
-
-        <MovieSearch onAdd={handleAdd}/>
-        </>
+        <div className="movieListWrapperOut">
+            <div className='movieListWrapperIn'>
+                <h2>Movie List</h2>
+                <ol>
+                    {
+                        movieList.map( movie => (
+                            <li key={movie.id}>
+                                <div class="movieItemPosterWrapper">
+                                    <img src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`} alt={`${movie.title}`} />
+                                </div>
+                                <div class="movieItemContent">
+                                    <p className='truncate'>{movie.title}</p>
+                                    <p>({movie.release_date.split('-')[0]})</p>
+                                    <button onClick={() => handleRemove(movie.id)}>Remove This</button>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ol>
+            </div>
+            <MovieSearch onAdd={handleAdd}/>
+        </div>
     )
 }
 

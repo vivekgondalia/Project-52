@@ -35,34 +35,35 @@ const MovieSearch = ({onAdd}) => {
         onAdd(movie);
     }
 
-    return <>
-    <h2>Search</h2> 
-    <form>
-        <input 
-                type="text"
-                name="query"
-                placeholder='Search movie name'
-                value={query}
-                onChange={handleQueryChange}
-        />
-        <button onClick={handleSearch}>Search</button> 
-    </form>
-    
-    {results.length ? <h2>Search Results : </h2> : null}
-    
-    <ol>
-        {
-            results.map( movie => (
-                <li key={movie.id}>
-                    {movie.title} - {movie.release_date.split('-')[0]}
-                    {/* <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={`${movie.title}`} /> */}
-                    <button onClick={() => handleAddToTheList(movie)}>Add This Movie!</button>
-                </li>
-            ))
-        }
-    </ol> 
-    </>
-
+    return (
+    <div className="movieSearchWrapper">
+        <h2>Search</h2> 
+        <form className="movieSearchInput">
+            <input 
+                    type="text"
+                    name="query"
+                    placeholder='Search movie name'
+                    value={query}
+                    onChange={handleQueryChange}
+            />
+            <button onClick={handleSearch}>Search</button> 
+        </form>
+        
+        {results.length ? <h2>Search Results : </h2> : null}
+        
+        <ol className='movieSearchResults'>
+            {
+                results.map( movie => (
+                    <li key={movie.id}>
+                        {movie.title} - {movie.release_date.split('-')[0]}
+                        {/* <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={`${movie.title}`} /> */}
+                        <button onClick={() => handleAddToTheList(movie)}>Add This Movie!</button>
+                    </li>
+                ))
+            }
+        </ol> 
+    </div>
+    )
 }
 
 export default MovieSearch;
