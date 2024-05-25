@@ -5,8 +5,12 @@ const MovieList = () => {
     const [movieList, setMovieList] = useState([]);
 
     const handleAdd = (newMovie) => {
-        console.log(newMovie);
         setMovieList([...movieList, newMovie]);
+    }
+
+    const handleRemove = (movieId) => {
+        const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
+        setMovieList(updatedMovieList);
     }
 
     return (
@@ -15,7 +19,10 @@ const MovieList = () => {
         <ol>
             {
                 movieList.map( movie => (
-                    <li key={movie.id}>{movie.title}</li>
+                    <li key={movie.id}>
+                        {movie.title}
+                        <button onClick={() => handleRemove(movie.id)}>Remove This</button>
+                    </li>
                 ))
             }
         </ol>
