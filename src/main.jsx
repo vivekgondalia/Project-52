@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import './App.css'
 
 import Movie from './Movie'
-// import ProjectIdeas from './ProjectIdeas'
+import MovieSearch from './MovieSearch'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <MovieSearch />
     <Movie />
-    {/* <ProjectIdeas /> */}
   </React.StrictMode>,
 )
