@@ -80,7 +80,8 @@ namespace Project52DotNet.Controllers
             _context.Movies.Add(movieItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovieItem", new { id = movieItem.Id }, movieItem);
+            //return CreatedAtAction("PostMovieItem", new { id = movieItem.Id }, movieItem);
+            return CreatedAtAction(nameof(PostMovieItem), new { id = movieItem.Id }, movieItem);
         }
 
         // DELETE: api/Movies/5
