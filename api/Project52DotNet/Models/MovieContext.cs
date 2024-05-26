@@ -9,5 +9,5 @@ public class MovieContext : DbContext
     {
     }
 
-    public DbSet<MovieContext> Movies { get; set; } = null!;
+    public DbSet<MovieItem> Movies { get; set; } = null!;
 }
