@@ -6,18 +6,39 @@ const MovieList = () => {
 
     const handleAdd = (newMovie) => {
         setMovieList([...movieList, newMovie]);
+        //send the new movie to DB
     }
 
     const handleRemove = (movieId) => {
         const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
         setMovieList(updatedMovieList);
     }
+    
+    const tableData = movieList.map((movie,idx) => {
+        return (
+            <tr key={movie.id}>
+                <td>{idx + 1}</td>
+                <td>{movie.title}</td>
+                <td>{movie.release_date.split('-')[0]}</td>
+                <td><button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button></td>
+            </tr>
+        );
+    });
 
     return (
         <div className="movieListWrapperOut">
             <div className='movieListWrapperIn'>
                 <h2>Movie List</h2>
-                <ol>
+                <table>
+                    <tr>
+                        <th>Week #</th>
+                        <th className='tableHeaderMovie'>Movie Name</th>
+                        <th>Year</th>
+                        <th></th>
+                    </tr>
+                    {tableData}
+                </table>
+                {/* <ol>
                     {
                         movieList.map( movie => (
                             <li key={movie.id}>
@@ -32,7 +53,7 @@ const MovieList = () => {
                             </li>
                         ))
                     }
-                </ol>
+                </ol> */}
             </div>
             <MovieSearch onAdd={handleAdd}/>
         </div>
