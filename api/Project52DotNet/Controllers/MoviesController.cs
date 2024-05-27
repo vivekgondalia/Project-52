@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project52DotNet.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace Project52DotNet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowLocalhost")]
     public class MoviesController : ControllerBase
     {
         private readonly MovieContext _context;

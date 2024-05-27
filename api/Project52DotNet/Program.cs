@@ -10,6 +10,14 @@ builder.Services.AddDbContext<MovieContext>(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            builder => builder
+                .WithOrigins("http://localhost:3000") // Specify the URL of your client application
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+    });
 
 var app = builder.Build();
 
@@ -21,6 +29,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
