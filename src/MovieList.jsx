@@ -1,12 +1,29 @@
 import {useState} from 'react';
 import MovieSearch from './MovieSearch'
+import axios from 'axios';
 
 const MovieList = () => {
     const [movieList, setMovieList] = useState([]);
 
     const handleAdd = (newMovie) => {
-        setMovieList([...movieList, newMovie]);
         //send the new movie to DB
+        const url = 'https://localhost:7109/api/Movies';
+        const data = {
+            title: newMovie.title,
+            month: parseInt(newMovie.release_date.split('-')[1]),
+            year: parseInt(newMovie.release_date.split('-')[0])
+        };
+
+        axios.post(url, data)
+        .then(response => {
+            // Handle success
+            //setMovieList([...movieList, newMovie]);
+            console.log('Response data:', response.data);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
     }
 
     const handleRemove = (movieId) => {
