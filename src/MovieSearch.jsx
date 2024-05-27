@@ -18,6 +18,7 @@ const MovieSearch = ({onAdd}) => {
             //setLoading(false);
             //console.log(response.data.results[0]);
             setResults(response.data.results);
+            setQuery('');
         })
         .catch(error => {
             console.log(error);
