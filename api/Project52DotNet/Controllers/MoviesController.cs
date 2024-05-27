@@ -22,14 +22,14 @@ namespace Project52DotNet.Controllers
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovieItem>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<MovieItemDto>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.Movies.Select(x => ItemToDto(x)).ToListAsync();
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MovieItem>> GetMovieItem(int id)
+        public async Task<ActionResult<MovieItemDto>> GetMovieItem(int id)
         {
             var movieItem = await _context.Movies.FindAsync(id);
 
@@ -38,20 +38,20 @@ namespace Project52DotNet.Controllers
                 return NotFound();
             }
 
-            return movieItem;
+            return ItemToDto(movieItem);
         }
 
         // PUT: api/Movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovieItem(int id, MovieItem movieItem)
+        public async Task<IActionResult> PutMovieItem(int id, MovieItemDto movieItemDto)
         {
-            if (id != movieItem.Id)
+            if (id != movieItemDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(movieItem).State = EntityState.Modified;
+            _context.Entry(movieItemDto).State = EntityState.Modified;
 
             try
             {
@@ -75,13 +75,19 @@ namespace Project52DotNet.Controllers
         // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MovieItem>> PostMovieItem(MovieItem movieItem)
+        public async Task<ActionResult<MovieItemDto>> PostMovieItem(MovieItemDto movieItemDto)
         {
+            var movieItem = new MovieItem
+            {
+                Title = movieItemDto.Title,
+                Year = movieItemDto.Year,
+                Month = movieItemDto.Month
+            };
             _context.Movies.Add(movieItem);
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("PostMovieItem", new { id = movieItem.Id }, movieItem);
-            return CreatedAtAction(nameof(PostMovieItem), new { id = movieItem.Id }, movieItem);
+            return CreatedAtAction(nameof(PostMovieItem), new { id = movieItem.Id }, ItemToDto(movieItem));
         }
 
         // DELETE: api/Movies/5
@@ -104,5 +110,14 @@ namespace Project52DotNet.Controllers
         {
             return _context.Movies.Any(e => e.Id == id);
         }
+
+        private static MovieItemDto ItemToDto(MovieItem movieItem) =>
+            new MovieItemDto
+            {
+                Id = movieItem.Id,
+                Title = movieItem.Title,
+                Year = movieItem.Year,
+                Month = movieItem.Month
+            };
     }
 }
