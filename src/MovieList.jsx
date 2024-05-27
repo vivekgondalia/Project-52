@@ -43,6 +43,25 @@ const MovieList = () => {
         });
     }
 
+    const handleAddManual = (newMovie) => {
+        const url = 'https://localhost:7109/api/Movies';
+        const data = {
+            title: newMovie.title,
+            month: parseInt(newMovie.year),
+            year: parseInt(newMovie.month)
+        };
+
+        axios.post(url, data)
+        .then(response => {
+            // Handle success
+            setMovieList([...movieList, response.data]);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error:', error);
+        });
+    }
+
     const handleRemove = (movieId) => {
         const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
         setMovieList(updatedMovieList);
@@ -65,7 +84,7 @@ const MovieList = () => {
     return (
         <div className="movieListWrapperOut">
             <div className='movieListWrapperIn'>
-                <h2>Movie List</h2>
+                <h1>Project 52</h1>
                 <table>
                     <thead>
                         <tr>
@@ -79,24 +98,8 @@ const MovieList = () => {
                         {tableData} 
                     </tbody>
                 </table>
-                {/* <ol>
-                    {
-                        movieList.map( movie => (
-                            <li key={movie.id}>
-                                <div class="movieItemPosterWrapper">
-                                    <img src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`} alt={`${movie.title}`} />
-                                </div>
-                                <div class="movieItemContent">
-                                    <p className='truncate'>{movie.title}</p>
-                                    <p>({movie.release_date.split('-')[0]})</p>
-                                    <button onClick={() => handleRemove(movie.id)}>Remove This</button>
-                                </div>
-                            </li>
-                        ))
-                    }
-                </ol> */}
             </div>
-            <MovieSearch onAdd={handleAdd}/>
+            <MovieSearch onAdd={handleAdd} onAddManual={handleAddManual}/>
         </div>
     )
 }

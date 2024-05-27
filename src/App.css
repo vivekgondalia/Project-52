@@ -3,6 +3,29 @@
   padding : 0;
 }
 
+.addMovieWrapper > input {
+  margin-right: 1%;
+  padding : 5px;
+  width : 20%;
+}
+
+.addMovieWrapper .addManualTitle {
+  width : 50%;
+}
+
+.addMovieButtonWrapper {
+  text-align: right;
+  margin-top: 3%;
+  margin-right: 2%;
+  margin-bottom: 3%;
+}
+
+.buttonAdd {
+  background-color: white;
+  color: green;
+  border : none;
+}
+
 .buttonRemove {
   background-color: white;
   color: #f44336;
@@ -12,28 +35,53 @@ button:hover {
   cursor: pointer;
 }
 
+.buttonAddManual{
+  margin-left: 1%;
+  padding: 5px;
+  width: 100px;
+  background-color: white;
+  color: green;
+  border : 1px solid green;
+}
+
+.buttonCancelManual {
+  margin-left: 1%;
+  padding: 5px;
+  width: 100px;
+  background-color: white;
+  color: grey;
+  border : 1px solid grey;
+}
+
 .mainWrapper {
-  height: 90vh;
-  border: 10px solid black;
+  /* height: 90vh; */
+  /* border: 10px solid black; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 h1 {
-  border : 5px solid blue;
+  /* border : 5px solid blue; */
+  padding: 1% 0;
 }
 
 .movieListWrapperOut {
   height: 100%;
   width: 90%;
-  border : 5px solid green;
+  /* border : 5px solid green; */
   display: flex;
   justify-content: space-between;
 }
 
 .movieListWrapperIn {
   width:50%;
+}
+
+.movieListWrapperIn > h1 {
+  margin-bottom: 2%;
+  text-align: center;
+  font-family: monospace;
 }
 
 .movieListWrapperIn > ol {
@@ -84,19 +132,53 @@ p.truncate {
 
 .movieSearchWrapper {
   width : 50%;
-  border-left : 5px solid black;
+  padding-left: 2%;
+  border-left: 2px solid black;
 }
 
 .movieSearchWrapper > h2 {
-  border : 5px solid orange;
+  margin-bottom: 2%;
+  /* border : 5px solid orange; */
 }
 
+.movieSearchWrapper .clearButtonWrapper {
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.movieSearchWrapper .clearButtonWrapper > button {
+  padding: 5px;
+  width: 100px;
+  background-color: white;
+  color: grey;
+  border: 1px solid grey;
+}
+
+
+
 .movieSearchInput {
-  border : 5px solid blueviolet;
+  /* border : 5px solid blueviolet; */
+  margin-top: 9%;
+  margin-bottom: 2%;
+}
+
+.movieSearchInput > input {
+  padding: 5px;
+  width: 80%;
+}
+
+.movieSearchInput > button {
+  margin-left: 10px;
+  padding: 5px;
+  width: 100px;
+  background-color: white;
+  color: #3498db;
+  border : 1px solid #3498db;
 }
 
 .movieSearchResults {
-  border : 5px solid grey;
+  /* border : 5px solid grey; */
+  margin-left: 3%;
 }
 
 .projectIdeas {
@@ -107,6 +189,10 @@ p.truncate {
 
 table {
   width: 95%;
+}
+
+td {
+  padding : 1%;
 }
 
 table, th, td {
@@ -132,3 +218,66 @@ tr {
 .tableHeaderMovie {
   width : 70%;
 }
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dot-blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.dots-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dots-spinner div {
+  width: 15px;
+  height: 15px;
+  margin: 3px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: dot-blink 1.4s infinite ease-in-out both;
+}
+
+.dots-spinner .dot1 { animation-delay: -0.32s; }
+.dots-spinner .dot2 { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-30px); }
+  60% { transform: translateY(-15px); }
+}
+
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.bouncing-loader div {
+  width: 18px;
+  height: 18px;
+  margin: 3px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.bouncing-loader .dot1 { animation-delay: -0.32s; }
+.bouncing-loader .dot2 { animation-delay: -0.16s; }

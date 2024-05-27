@@ -1,8 +1,7 @@
 import {useState} from 'react';
 
-const Movie = () => {
-    const [formData, setFormData] = useState({id: '', title: '', releaseYear: '', genre: '', monthOfTheYear: ''});
-    const [maxId, setMaxId] = useState(0);
+const Movie = ({onAdd, onCancel}) => {
+    const [formData, setFormData] = useState({title: '', year: '', month: ''});
 
     const handleFormChange = (e) => {
         const { name, value } = e.target;
@@ -14,14 +13,24 @@ const Movie = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // handleCreate(formData);
-        // console.log(formData);
-        setFormData({id:'', title : '', releaseYear: '', genre: '', monthOfTheYear:''});
+        let movieDto = {
+            "title" : formData.title,
+            "year" : formData.year,
+            "month" : formData.month
+        }
+        //console.log(`Please send this to DB via API : ${JSON.stringify(movieDto)}`);
+        onAdd(movieDto);
+        setFormData({title : '', year: '', month: ''});
+    }
+
+    const handleCancel = () => {
+        onCancel();
     }
 
     return <>
-        <form>
-            <input 
+        <form className="addMovieWrapper">
+            <input
+                className='addManualTitle' 
                 type="text"
                 name="title"
                 placeholder='Movie Title'
@@ -30,26 +39,22 @@ const Movie = () => {
             />
             <input 
                 type="text"
-                name="releaseYear"
+                name="year"
                 placeholder='Release Year'
-                value={formData.releaseYear}
+                value={formData.year}
                 onChange={handleFormChange}
             />
             <input 
                 type="text"
-                name="genre"
-                placeholder='Genre'
-                value={formData.genre}
+                name="month"
+                placeholder='Preferred Month'
+                value={formData.month}
                 onChange={handleFormChange}
             />
-            <input 
-                type="number"
-                name="monthOfTheYear"
-                placeholder='What month would you like to watch this movie?'
-                value={formData.monthOfTheYear}
-                onChange={handleFormChange}
-            />
-            <button onClick={handleSubmit}>Add Movie</button> 
+            <div className="addMovieButtonWrapper">
+                <button className="buttonAddManual" onClick={handleSubmit}>Add Movie</button> 
+                <button className="buttonCancelManual" onClick={handleCancel}>Cancel</button> 
+            </div>
         </form>
     </>
 }
