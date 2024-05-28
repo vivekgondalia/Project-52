@@ -39,15 +39,27 @@ const MovieSearch = ({onAdd, onAddManual}) => {
         onAdd(movie);
     }
 
+    const requiredApiJsonProps = ['title', 'release_date', 'id'];
+
+    const hasRequiredProps = (data, requiredProps) => {
+        return requiredProps.every(prop => prop in data);
+      };
+      
+
     const tableData = results.map((movie,idx) => {
-        return (
-            <tr key={movie.id}>
-                <td>{idx + 1}</td>
-                <td>{movie.title}</td>
-                <td>{movie.release_date.split('-')[0]}</td>
-                <td><button className="buttonAdd" onClick={() => handleAddToTheList(movie)}>Add</button></td>
-            </tr>
-        );
+        if(hasRequiredProps(movie, requiredApiJsonProps)){
+            return (
+                <tr key={movie.id}>
+                    <td>{idx + 1}</td>
+                    <td>{movie.title}</td>
+                    <td>{movie.release_date.split('-')[0]}</td>
+                    <td><button className="buttonAdd" onClick={() => handleAddToTheList(movie)}>Add</button></td>
+                </tr>
+            );
+        } else {
+            return null;
+        }
+        
     });
 
     const handleAddManual = (newMovie) => {
