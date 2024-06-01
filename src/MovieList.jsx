@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import MovieSearch from './MovieSearch'
 import axios from 'axios';
-import _ from 'lodash';
+import _, { first } from 'lodash';
 import genreMap from './genreMap';
 
 const MovieList = () => {
@@ -73,6 +73,17 @@ const MovieList = () => {
     const handleSort = path => {
         setSortColumn({path, order: 'asc'});
     }
+
+    const getGenreName = movie => {
+        //given movie.genre[]
+        //select first genreId[0]
+        //get the related genreName
+        //return the genreName
+        console.log(movie);
+        const firstGenreId = movie["genre_ids"][0];
+        console.log(genreMap.get(firstGenreId));
+        //return genreMap.get(firstGenreId);
+    }
     
     const sortedMovieList = _.orderBy(movieList, [sortColumn.path], [sortColumn.order]);
     
@@ -81,6 +92,7 @@ const MovieList = () => {
             <tr key={movie.id}>
                 <td>{idx + 1}</td>
                 <td>{movie.title}</td>
+                <td>{getGenreName(movie)}</td>
                 <td>{movie.year}</td>
                 <td><button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button></td>
             </tr>
@@ -101,6 +113,7 @@ const MovieList = () => {
                         <tr>
                             <th>Week #</th>
                             <th className='tableHeaderMovie'>Movie Name</th>
+                            <th>Genre</th>
                             <th>Year</th>
                             <th></th>
                         </tr>
