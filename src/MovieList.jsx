@@ -1,11 +1,14 @@
 import {useState, useEffect} from 'react';
 import MovieSearch from './MovieSearch'
 import axios from 'axios';
+import _ from 'lodash';
+import genreMap from './genreMap';
 
 const MovieList = () => {
     const [movieList, setMovieList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [sortColumn, setSortColumn] = useState({path : 'title', order: 'asc'});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,8 +69,14 @@ const MovieList = () => {
         const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
         setMovieList(updatedMovieList);
     }
+
+    const handleSort = path => {
+        setSortColumn({path, order: 'asc'});
+    }
     
-    const tableData = movieList.map((movie,idx) => {
+    const sortedMovieList = _.orderBy(movieList, [sortColumn.path], [sortColumn.order]);
+    
+    const tableData = sortedMovieList.map((movie,idx) => {
         return (
             <tr key={movie.id}>
                 <td>{idx + 1}</td>
@@ -77,6 +86,8 @@ const MovieList = () => {
             </tr>
         );
     });
+
+    
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
