@@ -86,8 +86,7 @@ const MovieTableStyled = ({data, onSort}) => {
                   onClick={() => handleRemove(movie.id)}
                   />
                 </TableCell>
-              {/* <button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button> */}
-            </TableRow>
+             </TableRow>
           ))}
         </TableBody>
       </Table>
