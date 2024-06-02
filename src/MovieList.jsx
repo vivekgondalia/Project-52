@@ -92,7 +92,7 @@ const MovieList = () => {
             <tr key={movie.id}>
                 <td>{idx + 1}</td>
                 <td>{movie.title}</td>
-                <td>n/a</td>
+                <td>{movie.month}</td>
                 <td>{movie.year}</td>
                 <td><button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button></td>
             </tr>
@@ -113,7 +113,7 @@ const MovieList = () => {
                         <tr>
                             <th>Week #</th>
                             <th className='tableHeaderMovie' onClick={() => handleSort('title')}>Movie Name</th>
-                            <th>Genre</th>
+                            <th onClick={() => handleSort('month')}>Month</th>
                             <th onClick={() => handleSort('year')}>Year</th>
                             <th></th>
                         </tr>
