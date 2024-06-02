@@ -1,6 +1,15 @@
 import {useState} from 'react';
 import movieApi from './movieApi';
 import AddMovie from './Movie';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Tooltip from '@mui/material/Tooltip';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
 const MovieSearch = ({onAdd, onAddManual}) => {
     const [query, setQuery] = useState('');
@@ -45,15 +54,37 @@ const MovieSearch = ({onAdd, onAddManual}) => {
       };
       
 
-    const tableData = results.map((movie,idx) => {
+    const searchTableData = results.map((movie,idx) => {
         if(hasRequiredProps(movie, requiredApiJsonProps)){
             return (
-                <tr key={movie.id}>
-                    <td>{idx + 1}</td>
-                    <td>{movie.title}</td>
-                    <td>{movie.release_date.split('-')[0]}</td>
-                    <td><button className="buttonAdd" onClick={() => handleAddToTheList(movie)}>Add</button></td>
-                </tr>
+                <TableRow
+                    key={idx+1}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                    <TableCell component="th" scope="row">
+                    {idx+1}
+                    </TableCell>
+                    <TableCell align="left">{movie.title}</TableCell>
+                    <TableCell align="left">{movie.release_date.split('-')[0]}</TableCell>
+                    <TableCell align="right">
+                        <Tooltip title="Add this movie" placement="right" arrow>
+                            <PlaylistAddIcon
+                                className="sortIcon" 
+                                onClick={() => handleAddToTheList(movie)}
+                                sx={{ 
+                                    color: 'grey',
+                                    fontSize: 18,
+                                    transition: 'transform 0.2s ease-in-out', // smooth transform transition
+                                        '&:hover': {
+                                        cursor: 'pointer',
+                                        transform: 'scale(1.5)', // scale up the icon on hover
+                                        color: '#3498db', // change color on hover
+                                        }
+                                }}
+                            />
+                        </Tooltip>
+                    </TableCell>
+                </TableRow>
             );
         } else {
             return null;
@@ -121,10 +152,9 @@ const MovieSearch = ({onAdd, onAddManual}) => {
         {/* {!loading && !error && results.length === 0 && <p>No results found</p>} */}
 
         {noSearchResultMessage}
-
         {clearSearchButton}
 
-        {
+        {/* {
             tableData.length ? <table>
                 <thead>
                     <tr>
@@ -138,6 +168,24 @@ const MovieSearch = ({onAdd, onAddManual}) => {
                     {tableData} 
                 </tbody>
             </table>
+            : null
+        } */}
+        { searchTableData.length ?
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell align="left">Movie</TableCell>
+                        <TableCell align="left">Year</TableCell>
+                        <TableCell align="right"></TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {searchTableData}
+                    </TableBody>
+                </Table>
+            </TableContainer> 
             : null
         }
     </div>
