@@ -10,6 +10,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 const MovieSearch = ({onAdd, onAddManual}) => {
     const [query, setQuery] = useState('');
@@ -113,22 +118,31 @@ const MovieSearch = ({onAdd, onAddManual}) => {
         </div> : <></>;
 
     const clearSearchButton = results.length ? <div className="clearButtonWrapper">
-        <button onClick={clearSearch}>Clear Search</button>
+        <Button variant="outlined" style={{width: '150px'}} onClick={clearSearch} size='large'>Clear Results</Button>
     </div>
     : <></>;
 
     return (
     <div className="movieSearchWrapper">
         <form className="movieSearchInput">
-            <input 
-                    type="text"
-                    name="query"
-                    placeholder='Search and add your movie...'
-                    autoComplete='off'
-                    value={query}
-                    onChange={handleQueryChange}
+            <TextField 
+                label="Search to add your movie..." 
+                variant="outlined" 
+                name="query"
+                autoComplete='off'
+                value={query}
+                fullWidth
+                onChange={handleQueryChange}
+                InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                          <IconButton onClick={handleSearch} edge="end">
+                            <SearchIcon />
+                          </IconButton>
+                      </InputAdornment>
+                    ),
+                }}
             />
-            <button onClick={handleSearch}>Search</button> 
         </form>
         
         {results.length ? <h2>Search Results : </h2> : null}
