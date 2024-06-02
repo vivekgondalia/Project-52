@@ -18,32 +18,18 @@ import Home from './Home';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div className='mainWrapper'>
-      <ToastContainer/>
-      {/* <MovieList/> */}
       <Router>
         <div>
           <Navigation />
-          {/* <nav>
-            <ul>
-              <li>
-                
-              </li>
-              <li>
-                <Link to="/movies">My Movies</Link>
-              </li>
-            </ul>
-          </nav> */}
+          <div className='mainWrapper'>
+            <ToastContainer/>
 
-          {/* A <Routes> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<MovieList />} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/movies" element={<MovieList />} />
+            </Routes>
+          </div>
         </div>
       </Router>
-    </div>
-    
   </React.StrictMode>,
 )

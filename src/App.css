@@ -268,3 +268,11 @@ tr {
 h1 > span {
   font-size: small;
 }
+
+.homeMovieList {
+  width: 50%;
+}
+
+.homeMovieList > h1 {
+  text-align: center;
+}
