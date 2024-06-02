@@ -3,6 +3,8 @@ import MovieSearch from './MovieSearch'
 import axios from 'axios';
 import _, { first } from 'lodash';
 import genreMap from './genreMap';
+import { toast } from 'react-toastify';
+
 
 const MovieList = () => {
     const [movieList, setMovieList] = useState([]);
@@ -14,10 +16,10 @@ const MovieList = () => {
         const fetchData = async () => {
           try {
             const response = await axios.get('https://localhost:7109/api/movies');
-            //console.log(response.data);
             setMovieList(response.data);
           } catch (error) {
             setError(error);
+            toast.error('Error fetching movies. Sorry.');
           } finally {
             setLoading(false);
           }
@@ -37,12 +39,12 @@ const MovieList = () => {
 
         axios.post(url, data)
         .then(response => {
-            // Handle success
             setMovieList([...movieList, response.data]);
+            toast.success('Movie was added to DB');
         })
         .catch(error => {
-            // Handle error
             console.error('Error:', error);
+            toast.error('Failed to ADD movie. Sorry.');
         });
     }
 
@@ -56,18 +58,19 @@ const MovieList = () => {
 
         axios.post(url, data)
         .then(response => {
-            // Handle success
             setMovieList([...movieList, response.data]);
+            toast.success('Movie was added to DB');
         })
         .catch(error => {
-            // Handle error
-            console.error('Error:', error);
+            //console.error('Error:', error);
+            toast.error('Failed to ADD movie. Sorry.');
         });
     }
 
     const handleRemove = (movieId) => {
         const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
         setMovieList(updatedMovieList);
+        toast.error('Movie was REMOVED.');
     }
 
     const handleSort = path => {
@@ -75,14 +78,9 @@ const MovieList = () => {
     }
 
     const getGenreName = movie => {
-        //given movie.genre[]
-        //select first genreId[0]
-        //get the related genreName
-        //return the genreName
-        console.log(movie);
         const firstGenreId = movie["genre_ids"][0];
         console.log(genreMap.get(firstGenreId));
-        //return genreMap.get(firstGenreId);
+        return genreMap.get(firstGenreId);
     }
     
     const sortedMovieList = _.orderBy(movieList, [sortColumn.path], [sortColumn.order]);
