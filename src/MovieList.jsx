@@ -4,6 +4,7 @@ import axios from 'axios';
 import _, { first } from 'lodash';
 import genreMap from './genreMap';
 import { toast } from 'react-toastify';
+import MovieTableStyled from './MovieTableStyled';
 
 
 const MovieList = () => {
@@ -106,7 +107,7 @@ const MovieList = () => {
         <div className="movieListWrapperOut">
             <div className='movieListWrapperIn'>
                 <h1>Project 52</h1>
-                <table>
+                {/* <table>
                     <thead>
                         <tr>
                             <th>Week #</th>
@@ -119,7 +120,8 @@ const MovieList = () => {
                     <tbody>
                         {tableData} 
                     </tbody>
-                </table>
+                </table> */}
+                <MovieTableStyled data={sortedMovieList} />
             </div>
             <MovieSearch onAdd={handleAdd} onAddManual={handleAddManual}/>
         </div>

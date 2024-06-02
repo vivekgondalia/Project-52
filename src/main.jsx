@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 import MovieList from './MovieList'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

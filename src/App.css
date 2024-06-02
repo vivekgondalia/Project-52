@@ -154,10 +154,7 @@ p.truncate {
   border: 1px solid grey;
 }
 
-
-
 .movieSearchInput {
-  /* border : 5px solid blueviolet; */
   margin-top: 9%;
   margin-bottom: 2%;
 }
@@ -177,7 +174,6 @@ p.truncate {
 }
 
 .movieSearchResults {
-  /* border : 5px solid grey; */
   margin-left: 3%;
 }
 
@@ -187,33 +183,16 @@ p.truncate {
   align-items: end;
 }
 
-table {
-  width: 95%;
-}
+
 
 td {
   padding : 1%;
 }
 
-table, th, td {
-  border:1px solid black;
-  border-collapse: collapse;
-}
 
 tr {
   border-bottom: 1px solid #ddd;
-  /* text-align: center; */
 }
-
-/* tr:hover {background-color: #D6EEEE;} */
-
-/* th, td {
-  border-color: #96D4D4;
-} */
-
-/* tr:nth-child(even) {
-  background-color: #D6EEEE;
-} */
 
 .tableHeaderMovie {
   width : 60%;
