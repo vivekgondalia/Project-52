@@ -1,24 +1,62 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
-const data = [
-  { id: 1, name: 'Alice', age: 24, location: 'New York' },
-  { id: 2, name: 'Bob', age: 30, location: 'London' },
-  { id: 3, name: 'Catherine', age: 22, location: 'Los Angeles' },
-  { id: 4, name: 'David', age: 28, location: 'Tokyo' }
-];
 
-const MovieTableStyled = ({data}) => {
+const MovieTableStyled = ({data, onSort}) => {
+  const handleSort = (path) => {
+    onSort(path);
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Week #</TableCell>
-            <TableCell align="left" onClick={() => handleSort('title')}>Movie</TableCell>
-            <TableCell align="right" onClick={() => handleSort('month')}>Month</TableCell>
-            <TableCell align="right" onClick={() => handleSort('year')}>Year</TableCell>
+            <TableCell align="left"  onClick={() => handleSort('title')}>
+              Movie 
+              <FilterListIcon className="sortIcon" sx={{ 
+                  color: 'grey',
+                  fontSize: 14,
+                  transition: 'transform 0.2s ease-in-out', // smooth transform transition
+                    '&:hover': {
+                      cursor: 'pointer',
+                      transform: 'scale(1.2)', // scale up the icon on hover
+                      color: 'blue', // change color on hover
+                    }
+                }}
+              />
+            </TableCell>
+            <TableCell align="right" onClick={() => handleSort('month')}>
+              Month
+              <FilterListIcon className="sortIcon" sx={{ 
+                  color: 'grey',
+                  fontSize: 14,
+                  transition: 'transform 0.2s ease-in-out', // smooth transform transition
+                    '&:hover': {
+                      cursor: 'pointer',
+                      transform: 'scale(1.2)', // scale up the icon on hover
+                      color: 'blue', // change color on hover
+                    }
+                }}
+              />
+            </TableCell>
+            <TableCell align="right" onClick={() => handleSort('year')}>
+              Year
+              <FilterListIcon className="sortIcon" sx={{ 
+                  color: 'grey',
+                  fontSize: 14,
+                  transition: 'transform 0.2s ease-in-out', // smooth transform transition
+                    '&:hover': {
+                      cursor: 'pointer',
+                      transform: 'scale(1.2)', // scale up the icon on hover
+                      color: 'blue', // change color on hover
+                    }
+                }}
+              />
+            </TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>

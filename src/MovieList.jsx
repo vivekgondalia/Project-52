@@ -106,7 +106,7 @@ const MovieList = () => {
     return (
         <div className="movieListWrapperOut">
             <div className='movieListWrapperIn'>
-                <h1>Project 52</h1>
+                <h1>Project 52<span>({movieList.length})</span></h1>
                 {/* <table>
                     <thead>
                         <tr>
@@ -121,7 +121,7 @@ const MovieList = () => {
                         {tableData} 
                     </tbody>
                 </table> */}
-                <MovieTableStyled data={sortedMovieList} />
+                <MovieTableStyled data={sortedMovieList} onSort={handleSort}/>
             </div>
             <MovieSearch onAdd={handleAdd} onAddManual={handleAddManual}/>
         </div>

@@ -260,3 +260,11 @@ tr {
 
 .bouncing-loader .dot1 { animation-delay: -0.32s; }
 .bouncing-loader .dot2 { animation-delay: -0.16s; }
+
+.movieListWrapperIn .sortIcon {
+  padding-left: 5px;
+}
+
+h1 > span {
+  font-size: small;
+}
