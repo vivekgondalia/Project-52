@@ -4,7 +4,7 @@ import axios from 'axios';
 import _, { first } from 'lodash';
 import genreMap from './genreMap';
 import { toast } from 'react-toastify';
-import MovieTableStyled from './MovieTableStyled';
+import MovieTable from './MovieTable';
 
 
 const MovieList = () => {
@@ -17,7 +17,8 @@ const MovieList = () => {
         const fetchData = async () => {
           try {
             const response = await axios.get('https://localhost:7109/api/movies');
-            setMovieList(response.data);
+            let sortedMovieList = _.orderBy(response.data, [sortColumn.path], [sortColumn.order]);
+            setMovieList(sortedMovieList);
           } catch (error) {
             setError(error);
             toast.error('Error fetching movies. Sorry.');
@@ -44,8 +45,7 @@ const MovieList = () => {
             toast.success('Movie was added to DB');
         })
         .catch(error => {
-            console.error('Error:', error);
-            toast.error('Failed to ADD movie. Sorry.');
+            toast.error(`Sorry, ${error.response.data}`);
         });
     }
 
@@ -63,15 +63,24 @@ const MovieList = () => {
             toast.success('Movie was added to DB');
         })
         .catch(error => {
-            //console.error('Error:', error);
             toast.error('Failed to ADD movie. Sorry.');
         });
     }
 
-    const handleRemove = (movieId) => {
-        const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
-        setMovieList(updatedMovieList);
-        toast.error('Movie was REMOVED.');
+    const handleRemove = async (movieId) => {
+        try {
+            const url = 'https://localhost:7109/api/Movies';
+            await axios.delete(`${url}/${movieId}`);
+            
+            // Handle further actions like updating UI or redirecting
+            const updatedMovieList = movieList.filter(movie => movie.id !== movieId);
+            let sortedMovieList = _.orderBy(updatedMovieList, [sortColumn.path], [sortColumn.order]);
+            setMovieList(sortedMovieList);
+            toast.success('Movie was removed from your list.');
+          } catch (error) {
+            toast.error('Sorry, could not delete the movie.');
+          }
+        
     }
 
     const handleSort = path => {
@@ -84,19 +93,19 @@ const MovieList = () => {
         return genreMap.get(firstGenreId);
     }
     
-    const sortedMovieList = _.orderBy(movieList, [sortColumn.path], [sortColumn.order]);
+    // const sortedMovieList = _.orderBy(movieList, [sortColumn.path], [sortColumn.order]);
     
-    const tableData = sortedMovieList.map((movie,idx) => {
-        return (
-            <tr key={movie.id}>
-                <td>{idx + 1}</td>
-                <td>{movie.title}</td>
-                <td>{movie.month}</td>
-                <td>{movie.year}</td>
-                <td><button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button></td>
-            </tr>
-        );
-    });
+    // const tableData = sortedMovieList.map((movie,idx) => {
+    //     return (
+    //         <tr key={movie.id}>
+    //             <td>{idx + 1}</td>
+    //             <td>{movie.title}</td>
+    //             <td>{movie.month}</td>
+    //             <td>{movie.year}</td>
+    //             <td><button className="buttonRemove" onClick={() => handleRemove(movie.id)}>Remove</button></td>
+    //         </tr>
+    //     );
+    // });
 
     
 
@@ -105,25 +114,11 @@ const MovieList = () => {
 
     return (
         <div className="movieListWrapperOut">
-            <div className='movieListWrapperIn'>
+            {/* <div className='movieListWrapperIn'>
                 <h1>Project 52<span>({movieList.length})</span></h1>
-                {/* <table>
-                    <thead>
-                        <tr>
-                            <th>Week #</th>
-                            <th className='tableHeaderMovie' onClick={() => handleSort('title')}>Movie Name</th>
-                            <th onClick={() => handleSort('month')}>Month</th>
-                            <th onClick={() => handleSort('year')}>Year</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableData} 
-                    </tbody>
-                </table> */}
-                <MovieTableStyled data={sortedMovieList} onSort={handleSort}/>
-            </div>
+            </div> */}
             <MovieSearch onAdd={handleAdd} onAddManual={handleAddManual}/>
+            <MovieTable data={movieList} onSort={handleSort} onDelete={handleRemove}/>
         </div>
     )
 }

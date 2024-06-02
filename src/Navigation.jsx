@@ -69,7 +69,7 @@ import { useNavigate} from 'react-router-dom';
               Project 52
             </Typography>
   
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: "right" }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -120,11 +120,12 @@ import { useNavigate} from 'react-router-dom';
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                alignItems: "right"
               }}
             >
               Project 53
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: "end" } }}>
                 <Button
                   onClick={goToHome}
                   sx={{ my: 2, color: 'white', display: 'block' }}

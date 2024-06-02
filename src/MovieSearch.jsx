@@ -17,7 +17,6 @@ const MovieSearch = ({onAdd, onAddManual}) => {
         try {
             const response = await movieApi.get(`/search/movie?query=${query}`);
             const result = response.data.results;
-            
             if(!result.length)
                 setNoResultFlag(true);
             setResults(response.data.results);
@@ -93,7 +92,7 @@ const MovieSearch = ({onAdd, onAddManual}) => {
             <input 
                     type="text"
                     name="query"
-                    placeholder='Search your movie...'
+                    placeholder='Search and add your movie...'
                     autoComplete='off'
                     value={query}
                     onChange={handleQueryChange}

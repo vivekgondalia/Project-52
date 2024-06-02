@@ -54,24 +54,18 @@ button:hover {
 }
 
 .mainWrapper {
-  /* height: 90vh; */
-  /* border: 10px solid black; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 h1 {
-  /* border : 5px solid blue; */
   padding: 1% 0;
 }
 
 .movieListWrapperOut {
   height: 100%;
-  width: 90%;
-  /* border : 5px solid green; */
-  display: flex;
-  justify-content: space-between;
+  width: 50%;
 }
 
 .movieListWrapperIn {
@@ -131,14 +125,12 @@ p.truncate {
 }
 
 .movieSearchWrapper {
-  width : 50%;
+  margin-bottom: 5%;
   padding-left: 2%;
-  border-left: 2px solid black;
 }
 
 .movieSearchWrapper > h2 {
   margin-bottom: 2%;
-  /* border : 5px solid orange; */
 }
 
 .movieSearchWrapper .clearButtonWrapper {
@@ -275,4 +267,5 @@ h1 > span {
 
 .homeMovieList > h1 {
   text-align: center;
+  margin: 3% 0;
 }

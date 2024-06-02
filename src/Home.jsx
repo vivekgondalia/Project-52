@@ -1,13 +1,34 @@
 import {useState, useEffect} from 'react';
 import axios from "axios";
 import { toast } from 'react-toastify';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-
+import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { styled } from '@mui/material/styles';
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+          backgroundColor: theme.palette.common.black,
+          color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+          fontSize: 14,
+        },
+      }));
+
+      const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+          border: 0,
+        },
+      }));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,24 +55,24 @@ const Home = () => {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell align="left">Movie</TableCell>
-                            <TableCell align="right">Year</TableCell>
-                        </TableRow>
+                        <StyledTableRow>
+                            <StyledTableCell></StyledTableCell>
+                            <StyledTableCell align="left">Movie</StyledTableCell>
+                            <StyledTableCell align="right">Year</StyledTableCell>
+                        </StyledTableRow>
                     </TableHead>
                     <TableBody>
                     {movies.map((row, idx) => (
-                        <TableRow
+                        <StyledTableRow
                         key={idx}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell component="th" scope="row">
+                        <StyledTableCell component="th" scope="row">
                             {idx+1}
-                        </TableCell>
-                        <TableCell align="left" sx={{ width: '40%' }}>{row.title}</TableCell>
-                        <TableCell align="right">{row.year}</TableCell>
-                        </TableRow>
+                        </StyledTableCell>
+                        <StyledTableCell align="left" sx={{ width: '40%' }}>{row.title}</StyledTableCell>
+                        <StyledTableCell align="right">{row.year}</StyledTableCell>
+                        </StyledTableRow>
                     ))}
                     </TableBody>
                 </Table>
