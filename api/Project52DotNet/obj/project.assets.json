@@ -8588,24 +8588,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/vivekgondalia/.nuget/packages/": {}
+    "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/vivekgondalia/Documents/code/react/Project52/api/Project52DotNet/Project52DotNet.csproj",
+      "projectUniqueName": "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\Documents\\code\\Project52\\Project-52\\api\\Project52DotNet\\Project52DotNet.csproj",
       "projectName": "Project52DotNet",
-      "projectPath": "/Users/vivekgondalia/Documents/code/react/Project52/api/Project52DotNet/Project52DotNet.csproj",
-      "packagesPath": "/Users/vivekgondalia/.nuget/packages/",
-      "outputPath": "/Users/vivekgondalia/Documents/code/react/Project52/api/Project52DotNet/obj/",
+      "projectPath": "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\Documents\\code\\Project52\\Project-52\\api\\Project52DotNet\\Project52DotNet.csproj",
+      "packagesPath": "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\Documents\\code\\Project52\\Project-52\\api\\Project52DotNet\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/vivekgondalia/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Vivek Gondalia.VGONDALIA-LT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8685,7 +8691,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
